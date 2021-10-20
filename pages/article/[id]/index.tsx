@@ -33,7 +33,7 @@ export default ArticlePage
 
 // Much faster and can be used in Static Website
 export const getStaticProps:GetStaticProps = async (context:GetStaticPropsContext) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params.id}`)
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params?.id}`)
   const article = await res.json()
   return {
     props: {

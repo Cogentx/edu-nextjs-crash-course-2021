@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next build && next export",
+    "serve": "serve -s out -p 8000",
     "lint": "next lint"
   },
   "dependencies": {
