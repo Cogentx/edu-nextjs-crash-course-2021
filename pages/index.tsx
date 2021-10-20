@@ -1,10 +1,16 @@
 import type { NextPage, GetStaticProps } from 'next'
+import type {AppProps} from 'next/app'
 import Head from 'next/head'
 import Image from 'next/image'
+import Articles from '../components/Articles'
 import Layout from '../components/Layout'
 import styles from '../styles/Layout.module.css'
 
-const Home: NextPage = (props:any) => {
+interface Props {
+  articles?: any[]
+}
+
+const Home: NextPage<Props> = ({articles}) => {
 
   return (
     <>
@@ -14,15 +20,7 @@ const Home: NextPage = (props:any) => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <h1>Welcome to Next.js</h1>
-        <ul>
-        {props.articles.map((article:any) => {
-          return (
-            <li key={article.id}>
-              <p>{article.title}</p>
-            </li>
-          )
-        })}
-        </ul>
+        <Articles articles={articles}/>
     </>
   )
 }
