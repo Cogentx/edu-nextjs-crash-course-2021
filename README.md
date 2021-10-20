@@ -1,3 +1,17 @@
+# Next.js Crash Course 2021
+
+[Traversy Media - YouTube](https://youtu.be/mTz0GXj8NN0)
+
+## Getting Started with Next.js
+
+This project is based on Traversy Media's Next.js Crash Course but uses TypeScript in place of JavaScript.
+
+`npx create-next-app next-crash-course --use-npm --typescript`
+
+The reference to `--use-npm` is to instruct create-next-app that you want to use `npm` instead of `yarn` which is only necessary if you want to use `npm` and also have `yarn` installed.
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
