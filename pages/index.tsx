@@ -1,10 +1,11 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/Layout'
 import styles from '../styles/Layout.module.css'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props:any) => {
+
   return (
     <>
         <Head>
@@ -13,8 +14,30 @@ const Home: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <h1>Welcome to Next.js</h1>
+        <ul>
+        {props.articles.map((article:any) => {
+          return (
+            <li key={article.id}>
+              <p>{article.title}</p>
+            </li>
+          )
+        })}
+        </ul>
     </>
   )
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=6`)
+
+  const articles = await res.json()
+
+  return {
+    props: {
+      articles
+    }
+  }
+}
+
