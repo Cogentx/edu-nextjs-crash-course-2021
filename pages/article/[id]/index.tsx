@@ -2,6 +2,8 @@ import type {GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage} fr
 // import type {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next'
 import Link from 'next/link'
 // import {useRouter} from 'next/router'
+import {server} from '../../../config/index'
+
 
 interface Props {
   article: ArticleProps,
@@ -33,7 +35,7 @@ export default ArticlePage
 
 // Much faster and can be used in Static Website
 export const getStaticProps:GetStaticProps = async (context:GetStaticPropsContext) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params?.id}`)
+  const res = await fetch(`${server}/api/articles/${context.params?.id}`)
   const article = await res.json()
   return {
     props: {
@@ -43,8 +45,9 @@ export const getStaticProps:GetStaticProps = async (context:GetStaticPropsContex
 }
 
 // Needed with getStaticProps
+// fetching StaticProps from API requires absolute URL so we need to know if in 'dev' or on 'production' server
 export const getStaticPaths:GetStaticPaths = async () => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts`)
+  const res = await fetch(`${server}/api/articles`)
   const articles = await res.json()
 
   // Get list of Article IDs
@@ -59,6 +62,17 @@ export const getStaticPaths:GetStaticPaths = async () => {
     fallback: false, // returns 404 page if not found
   }
 }
+
+// Much faster and can be used in Static Website
+// export const getStaticProps:GetStaticProps = async (context:GetStaticPropsContext) => {
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params?.id}`)
+//   const article = await res.json()
+//   return {
+//     props: {
+//       article
+//     }
+//   }
+// }
 
 // Dynamic on each Server fetch
 // export const getServerSideProps:GetServerSideProps = async (context:GetServerSidePropsContext) => {
