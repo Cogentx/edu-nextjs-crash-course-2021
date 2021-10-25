@@ -1,14 +1,11 @@
-import type {NextPage}
-from 'next';
-import Head from 'next/head'
+import type {NextPage} from 'next';
+import Meta from '../components/Meta';
 
 const About : NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>WebDev Newz</title>
-      <meta name="keywords" content="React Next.js Nextjs Next" />
-      </Head>
+      {/* override title in metadata */}
+      <Meta title="About"/>
       <h1>About Page</h1>
     </div>
   )

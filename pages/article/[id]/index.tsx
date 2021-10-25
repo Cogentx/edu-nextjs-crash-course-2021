@@ -1,20 +1,23 @@
 import type {GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage} from 'next'
 // import type {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next'
 import Link from 'next/link'
+import Meta from '../../../components/Meta'
 // import {useRouter} from 'next/router'
 import {server} from '../../../config/index'
+import IArticle from '../../api/articles/IArticleData'
 
 
 interface Props {
-  article: ArticleProps,
+  article: IArticle,
+  // article: ArticleProps,
 }
 
-interface ArticleProps {
-    id: any,
-    title: string,
-    userId?: any,
-    body?: string,
-}
+// interface ArticleProps {
+//     id: any,
+//     title: string,
+//     userId?: any,
+//     body?: string,
+// }
 
 const ArticlePage: NextPage<Props> = ({article}) => {
 
@@ -23,6 +26,7 @@ const ArticlePage: NextPage<Props> = ({article}) => {
 
   return (
     <>
+    <Meta title={article.title} description={article.excerpt}/>
     <h1>{article.title}</h1>
     <p>{article.body}</p>
     <br />
@@ -51,7 +55,8 @@ export const getStaticPaths:GetStaticPaths = async () => {
   const articles = await res.json()
 
   // Get list of Article IDs
-  const ids = articles.map(({id}:ArticleProps) => id )
+  const ids = articles.map(({id}:IArticle) => id )
+  // const ids = articles.map(({id}:ArticleProps) => id )
   // Turn into Paths
   const paths = ids.map((id:any) => (
     {params: {id:id.toString()}}
